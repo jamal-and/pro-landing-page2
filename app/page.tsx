@@ -1,10 +1,42 @@
 'use client';
 
-import { motion, useScroll, useTransform, useInView } from 'motion/react';
-import { useRef, useState, useEffect } from 'react';
-import { Camera, Bell, ChefHat, Menu, X, Star, CheckCircle2, ChevronRight, Apple, Play } from 'lucide-react';
+import { Apple, Bell, Camera, CheckCircle2, ChefHat, Menu, Play, Star, X } from 'lucide-react';
+import { motion, useInView } from 'motion/react';
+import { useEffect, useRef, useState } from 'react';
 
 // --- Components ---
+
+const STORE_LINKS = {
+  appStore: 'https://apps.apple.com/us/app/protein-tracker-pro/id1660036988',
+  googlePlay: 'https://play.google.com/store/apps/details?id=com.jamal.proteinTrackerPro&hl=en&gl=US',
+  privacyPolicy: 'https://sites.google.com/view/jamaltek/home',
+  termsOfUse: 'https://www.apple.com/legal/internet-services/itunes/dev/stdeula/',
+  website: 'https://jamal-and.github.io',
+  supportEmail: 'mailto:tracker.protein@gmail.com',
+};
+
+const APP_DATA = {
+  name: 'Protein Tracker Pro',
+  icon: 'https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/f4/7e/46/f47e4665-92e6-7493-2f07-f1cc305133f0/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/512x512bb.jpg',
+  screenshots: [
+    '/assets/ProteinHome.PNG',
+    '/assets/ProteinTracker.PNG',
+    '/assets/ProteinLog.PNG',
+    '/assets/ProteinStatistic.PNG',
+    '/assets/ProteinFavorites.PNG',
+    '/assets/ProteinRecipes.PNG',
+  ],
+  appStoreRating: 4.8,
+  appStoreRatingsCount: 32,
+  googlePlayRating: 4.3,
+  googlePlayReviewsCount: '1.22K',
+  googlePlayDownloads: '100K+',
+  developerDisplay: 'JamalTek',
+  category: 'Health & Fitness',
+  version: '1.2.32',
+  updatedLabel: 'Updated July 29, 2025',
+  price: 'Free',
+};
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -20,20 +52,18 @@ const Navbar = () => {
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'glass-nav py-4' : 'bg-transparent py-6'}`}>
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-[var(--primary)] flex items-center justify-center icon-glow">
-            <CheckCircle2 className="w-5 h-5 text-white" />
-          </div>
-          <span className="font-display font-bold text-xl tracking-tight text-white">Protein Tracker Pro</span>
+          <img src={APP_DATA.icon} alt={`${APP_DATA.name} icon`} className="w-8 h-8 rounded-lg object-cover icon-glow" />
+          <span className="font-display font-bold text-xl tracking-tight text-white">{APP_DATA.name}</span>
         </div>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-4">
-          <button className="px-5 py-2 rounded-full border border-[var(--dark-border)] text-sm font-medium hover:bg-white/5 transition-colors flex items-center gap-2">
+          <a href={STORE_LINKS.appStore} target="_blank" rel="noreferrer" className="px-5 py-2 rounded-full border border-[var(--dark-border)] text-sm font-medium hover:bg-white/5 transition-colors flex items-center gap-2">
             <Apple className="w-4 h-4" /> App Store
-          </button>
-          <button className="px-5 py-2 rounded-full border border-[var(--dark-border)] text-sm font-medium hover:bg-white/5 transition-colors flex items-center gap-2">
+          </a>
+          <a href={STORE_LINKS.googlePlay} target="_blank" rel="noreferrer" className="px-5 py-2 rounded-full border border-[var(--dark-border)] text-sm font-medium hover:bg-white/5 transition-colors flex items-center gap-2">
             <Play className="w-4 h-4" /> Google Play
-          </button>
+          </a>
         </div>
 
         {/* Mobile Toggle */}
@@ -44,17 +74,17 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="absolute top-full left-0 right-0 glass-nav border-t border-[var(--dark-border)] p-6 flex flex-col gap-4 md:hidden"
         >
-          <button className="w-full py-3 rounded-full border border-[var(--dark-border)] text-sm font-medium hover:bg-white/5 transition-colors flex items-center justify-center gap-2">
+          <a href={STORE_LINKS.appStore} target="_blank" rel="noreferrer" className="w-full py-3 rounded-full border border-[var(--dark-border)] text-sm font-medium hover:bg-white/5 transition-colors flex items-center justify-center gap-2">
             <Apple className="w-4 h-4" /> App Store
-          </button>
-          <button className="w-full py-3 rounded-full border border-[var(--dark-border)] text-sm font-medium hover:bg-white/5 transition-colors flex items-center justify-center gap-2">
+          </a>
+          <a href={STORE_LINKS.googlePlay} target="_blank" rel="noreferrer" className="w-full py-3 rounded-full border border-[var(--dark-border)] text-sm font-medium hover:bg-white/5 transition-colors flex items-center justify-center gap-2">
             <Play className="w-4 h-4" /> Google Play
-          </button>
+          </a>
         </motion.div>
       )}
     </header>
@@ -65,7 +95,7 @@ const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center pt-24 pb-12 overflow-hidden mesh-bg">
       <div className="max-w-7xl mx-auto px-6 md:px-12 w-full grid lg:grid-cols-[60%_40%] gap-12 items-center relative z-10">
-        
+
         <div className="flex flex-col items-start">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -76,7 +106,7 @@ const Hero = () => {
             <span className="text-[var(--primary)] text-xs font-bold uppercase tracking-widest">AI-Powered Nutrition Tracking</span>
           </motion.div>
 
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
@@ -86,7 +116,7 @@ const Hero = () => {
             <span className="text-[var(--primary)]">Perfected.</span>
           </motion.h1>
 
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
@@ -95,21 +125,21 @@ const Hero = () => {
             The smartest way to hit your daily protein goals — powered by AI, designed for real life.
           </motion.p>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut", delay: 0.3 }}
             className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-6"
           >
-            <button className="btn-primary px-8 py-4 rounded-full font-medium flex items-center justify-center gap-2 text-base">
+            <a href={STORE_LINKS.appStore} target="_blank" rel="noreferrer" className="btn-primary px-8 py-4 rounded-full font-medium flex items-center justify-center gap-2 text-base">
               <Apple className="w-5 h-5" /> Download on App Store
-            </button>
-            <button className="px-8 py-4 rounded-full font-medium flex items-center justify-center gap-2 text-base border border-white/20 hover:bg-white/5 transition-colors">
+            </a>
+            <a href={STORE_LINKS.googlePlay} target="_blank" rel="noreferrer" className="px-8 py-4 rounded-full font-medium flex items-center justify-center gap-2 text-base border border-white/20 hover:bg-white/5 transition-colors">
               <Play className="w-5 h-5" /> Get it on Google Play
-            </button>
+            </a>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut", delay: 0.4 }}
@@ -118,47 +148,29 @@ const Hero = () => {
             <div className="flex text-yellow-500">
               {[...Array(5)].map((_, i) => <Star key={i} className="w-3 h-3 fill-current" />)}
             </div>
-            <span>4.8 rating · 10,000+ users · Free to download</span>
+            <span>{APP_DATA.appStoreRating} App Store rating · {APP_DATA.googlePlayDownloads} Downloads · {APP_DATA.price} to download</span>
           </motion.div>
         </div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: "easeOut", delay: 0.3 }}
-          className="relative hidden lg:flex justify-end lg:-mr-12"
+          className="relative hidden lg:flex justify-center xl:justify-end"
         >
           <div className="iphone-glow"></div>
-          <motion.div 
+          <motion.div
             animate={{ y: [0, -12, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             className="iphone-frame"
           >
             <div className="iphone-notch"></div>
-            <div className="iphone-screen bg-[#0a0a0a] flex flex-col pt-12 px-4">
-              {/* Fake App UI */}
-              <div className="flex justify-between items-center mb-8">
-                <div>
-                  <div className="text-white/50 text-xs mb-1">Today</div>
-                  <div className="text-white font-bold text-xl">142g / 180g</div>
-                </div>
-                <div className="w-12 h-12 rounded-full border-4 border-[var(--primary)] border-t-white/10 flex items-center justify-center">
-                  <span className="text-xs font-bold text-[var(--primary)]">78%</span>
-                </div>
-              </div>
-              
-              <div className="space-y-3">
-                {[1, 2, 3].map((i) => (
-                  <div key={i} className="bg-white/5 rounded-2xl p-4 flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-white/10"></div>
-                    <div className="flex-1">
-                      <div className="h-3 w-20 bg-white/20 rounded-full mb-2"></div>
-                      <div className="h-2 w-12 bg-white/10 rounded-full"></div>
-                    </div>
-                    <div className="text-[var(--primary)] font-bold text-sm">+32g</div>
-                  </div>
-                ))}
-              </div>
+            <div className="iphone-screen">
+              <img
+                src={APP_DATA.screenshots[0]}
+                alt="Protein Tracker Pro screenshot"
+                className="h-full w-full object-contain object-center bg-[#111]"
+              />
             </div>
           </motion.div>
         </motion.div>
@@ -168,7 +180,7 @@ const Hero = () => {
   );
 };
 
-const CountUp = ({ end, suffix = "" }: { end: number, suffix?: string }) => {
+const CountUp = ({ end, suffix = "", decimals = 0 }: { end: number, suffix?: string, decimals?: number }) => {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
@@ -184,14 +196,14 @@ const CountUp = ({ end, suffix = "" }: { end: number, suffix?: string }) => {
           setCount(end);
           clearInterval(timer);
         } else {
-          setCount(Math.floor(start));
+          setCount(Number(start.toFixed(decimals)));
         }
       }, 16);
       return () => clearInterval(timer);
     }
-  }, [isInView, end]);
+  }, [isInView, end, decimals]);
 
-  return <span ref={ref}>{count}{suffix}</span>;
+  return <span ref={ref}>{count.toFixed(decimals)}{suffix}</span>;
 };
 
 const SocialProof = () => {
@@ -201,12 +213,12 @@ const SocialProof = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-[var(--dark-border)] text-center">
           <div className="pt-4 md:pt-0">
-            <div className="text-3xl font-display font-bold text-white mb-1"><CountUp end={4.8} /> <span className="text-[var(--primary)]">★</span></div>
-            <div className="text-sm text-[var(--text-secondary-dark)] uppercase tracking-wider font-medium">App Store Rating</div>
+            <div className="text-3xl font-display font-bold text-white mb-1"><CountUp end={APP_DATA.appStoreRating} decimals={1} /> <span className="text-[var(--primary)]">★</span></div>
+            <div className="text-sm text-[var(--text-secondary-dark)] uppercase tracking-wider font-medium">Rating</div>
           </div>
           <div className="pt-4 md:pt-0">
-            <div className="text-3xl font-display font-bold text-white mb-1"><CountUp end={10} suffix="K+" /></div>
-            <div className="text-sm text-[var(--text-secondary-dark)] uppercase tracking-wider font-medium">Active Users</div>
+            <div className="text-3xl font-display font-bold text-white mb-1">{APP_DATA.googlePlayDownloads}</div>
+            <div className="text-sm text-[var(--text-secondary-dark)] uppercase tracking-wider font-medium">Downloads</div>
           </div>
           <div className="pt-4 md:pt-0">
             <div className="text-3xl font-display font-bold text-white mb-1">iOS & Android</div>
@@ -239,7 +251,7 @@ const Features = () => {
     <section className="py-32 relative" ref={ref}>
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="text-center mb-20">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6 }}
@@ -247,7 +259,7 @@ const Features = () => {
           >
             What Makes It Different
           </motion.div>
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.1 }}
@@ -257,7 +269,7 @@ const Features = () => {
           </motion.h2>
         </div>
 
-        <motion.div 
+        <motion.div
           variants={container}
           initial="hidden"
           animate={isInView ? "show" : "hidden"}
@@ -309,10 +321,10 @@ const Showcase = () => {
     <section className="py-32 relative overflow-hidden bg-[#050709]" ref={ref}>
       {/* Background Orb */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[var(--primary)] rounded-full opacity-[0.03] blur-[120px] pointer-events-none"></div>
-      
+
       <div className="max-w-7xl mx-auto px-6 md:px-12 grid lg:grid-cols-[40%_60%] gap-16 items-center relative z-10">
-        
-        <motion.div 
+
+        <motion.div
           initial={{ opacity: 0, x: -30 }}
           animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
           transition={{ duration: 0.7 }}
@@ -334,64 +346,60 @@ const Showcase = () => {
         </motion.div>
 
         <div className="relative h-[600px] hidden md:block">
-          {/* Mockup 1 (Back) */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 50, x: 100 }}
-            animate={isInView ? { opacity: 0.6, y: -60, x: 140 } : { opacity: 0, y: 50, x: 100 }}
+            animate={isInView ? { opacity: 0.6, y: -60, x: 300 } : { opacity: 0, y: 50, x: 100 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-75 z-0"
           >
             <div className="iphone-frame border-[#222]">
-               <div className="iphone-notch"></div>
-               <div className="iphone-screen bg-[#111] p-6 pt-16">
-                 <div className="h-40 bg-white/5 rounded-2xl mb-4"></div>
-                 <div className="h-20 bg-white/5 rounded-2xl mb-4"></div>
-                 <div className="h-20 bg-white/5 rounded-2xl"></div>
-               </div>
+              <div className="iphone-notch"></div>
+              <div className="iphone-screen">
+                <img
+                  src={APP_DATA.screenshots[5]}
+                  alt={`${APP_DATA.name} Statistics screenshot`}
+                  className="h-full w-full object-contain object-top bg-[#111]"
+                />
+              </div>
             </div>
           </motion.div>
 
-          {/* Mockup 2 (Middle) */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 50, x: 0 }}
-            animate={isInView ? { opacity: 0.8, y: -30, x: 70 } : { opacity: 0, y: 50, x: 0 }}
+            animate={isInView ? { opacity: 1, y: -30, x: 150 } : { opacity: 0, y: 50, x: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-85 z-10"
           >
             <div className="iphone-frame border-[#1a1a1a]">
-               <div className="iphone-notch"></div>
-               <div className="iphone-screen bg-[#0a0a0a] p-6 pt-16">
-                 <div className="grid grid-cols-2 gap-4 mb-4">
-                   <div className="h-24 bg-[var(--primary-subtle)] rounded-2xl"></div>
-                   <div className="h-24 bg-white/5 rounded-2xl"></div>
-                 </div>
-                 <div className="h-32 bg-white/5 rounded-2xl mb-4"></div>
-               </div>
+              <div className="iphone-notch"></div>
+              <div className="iphone-screen">
+                <img
+                  src={APP_DATA.screenshots[2]}
+                  alt={`${APP_DATA.name} Meal Log screenshot`}
+                  className="h-full w-full object-contain object-top bg-[#111]"
+                />
+              </div>
             </div>
           </motion.div>
 
-          {/* Mockup 3 (Front) */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 50, x: -100 }}
             animate={isInView ? { opacity: 1, y: 0, x: 0 } : { opacity: 0, y: 50, x: -100 }}
             transition={{ duration: 0.8 }}
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20"
           >
             <div className="iphone-frame shadow-2xl">
-               <div className="iphone-notch"></div>
-               <div className="iphone-screen bg-black p-6 pt-16">
-                 <div className="text-2xl font-bold text-white mb-6">Dashboard</div>
-                 <div className="w-full aspect-square rounded-full border-[16px] border-[var(--primary-subtle)] border-t-[var(--primary)] flex items-center justify-center mb-8">
-                   <div className="text-center">
-                     <div className="text-3xl font-bold text-white">142g</div>
-                     <div className="text-xs text-white/50 uppercase tracking-widest">Protein</div>
-                   </div>
-                 </div>
-                 <button className="w-full py-4 rounded-full bg-[var(--primary)] text-white font-bold">Log Meal</button>
-               </div>
+              <div className="iphone-notch"></div>
+              <div className="iphone-screen">
+                <img
+                  src={APP_DATA.screenshots[3]}
+                  alt={`${APP_DATA.name} Statistics screenshot`}
+                  className="h-full w-full object-contain object-top bg-[#111]"
+                />
+              </div>
             </div>
             <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 whitespace-nowrap text-sm font-medium text-white/60 bg-white/5 px-4 py-2 rounded-full backdrop-blur-md border border-white/10">
-              Daily Dashboard
+              Statistics
             </div>
           </motion.div>
         </div>
@@ -423,7 +431,7 @@ const HowItWorks = () => {
     <section className="py-32 bg-[var(--light-bg)] text-gray-900 overflow-hidden" ref={ref}>
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="text-center mb-24">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6 }}
@@ -431,7 +439,7 @@ const HowItWorks = () => {
           >
             Getting Started
           </motion.div>
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.1 }}
@@ -447,7 +455,7 @@ const HowItWorks = () => {
 
           <div className="grid md:grid-cols-3 gap-12 relative z-10">
             {steps.map((step, i) => (
-              <motion.div 
+              <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -460,7 +468,7 @@ const HowItWorks = () => {
                     {i + 1}
                   </div>
                 </div>
-                
+
                 {/* Decorative Number */}
                 <div className="absolute -top-10 -left-4 text-[120px] font-display font-bold text-[var(--primary)] opacity-[0.04] leading-none select-none pointer-events-none hidden md:block">
                   0{i + 1}
@@ -483,26 +491,26 @@ const Testimonials = () => {
 
   const reviews = [
     {
-      text: "This app changed how I think about nutrition. The AI scanner is insanely accurate.",
-      author: "Marcus R.",
-      role: "Fitness Enthusiast"
+      text: "Helps a lot with recording how much protein I'm taking in!! Hitting those goals!",
+      author: 'Logan McCulloch',
+      role: 'April 12, 2026'
     },
     {
-      text: "Finally an app that's simple enough to stick with. I've been consistent for 3 months.",
-      author: "Sarah K.",
-      role: "Weight Loss Journey"
+      text: 'Just began using it. Seems very easy to track grams. It is going to be a big help and motivator for my daily goal of obtaining adequate protein.',
+      author: 'Clare Josaitis',
+      role: 'September 8, 2024'
     },
     {
-      text: "The recipe section alone is worth it. I've discovered so many high-protein meals.",
-      author: "Jason M.",
-      role: "Bodybuilder"
+      text: "I'm so happy I discovered this app as I only need to track my protein and not everything else. This will be very helpful so I can prevent getting another kidney stone due to too much protein.",
+      author: 'Monica Campbell',
+      role: 'April 18, 2023'
     }
   ];
 
   return (
     <section className="py-32 bg-[var(--dark-bg)] relative" ref={ref}>
       <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <motion.h2 
+        <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
@@ -513,7 +521,7 @@ const Testimonials = () => {
 
         <div className="grid md:grid-cols-3 gap-6">
           {reviews.map((review, i) => (
-            <motion.div 
+            <motion.div
               key={i}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -548,23 +556,23 @@ const FinalCTA = () => {
   return (
     <section className="py-32 relative overflow-hidden bg-[#050709] border-t border-[var(--dark-border)]" ref={ref}>
       {/* Animated Radial Pulse */}
-      <motion.div 
+      <motion.div
         animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[var(--primary)] rounded-full blur-[100px] pointer-events-none"
       ></motion.div>
 
       <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
           transition={{ duration: 0.6 }}
-          className="w-24 h-24 mx-auto bg-[var(--dark-surface)] rounded-3xl border border-[var(--dark-border)] flex items-center justify-center mb-8 shadow-[0_0_40px_rgba(57,158,183,0.3)]"
+          className="w-24 h-24 mx-auto bg-[var(--dark-surface)] rounded-3xl border border-[var(--dark-border)] flex items-center justify-center mb-8 shadow-[0_0_40px_rgba(57,158,183,0.3)] overflow-hidden"
         >
-          <CheckCircle2 className="w-12 h-12 text-[var(--primary)]" />
+          <img src={APP_DATA.icon} alt={`${APP_DATA.name} icon`} className="h-full w-full object-cover" />
         </motion.div>
 
-        <motion.h2 
+        <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6, delay: 0.1 }}
@@ -573,7 +581,7 @@ const FinalCTA = () => {
           Start Tracking Today.
         </motion.h2>
 
-        <motion.p 
+        <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -582,27 +590,27 @@ const FinalCTA = () => {
           Free to download. No credit card. Just results.
         </motion.p>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           className="flex flex-col sm:flex-row justify-center gap-4 mb-8"
         >
-          <button className="btn-primary px-8 py-4 rounded-full font-medium flex items-center justify-center gap-2 text-base">
+          <a href={STORE_LINKS.appStore} target="_blank" rel="noreferrer" className="btn-primary px-8 py-4 rounded-full font-medium flex items-center justify-center gap-2 text-base">
             <Apple className="w-5 h-5" /> Download on App Store
-          </button>
-          <button className="px-8 py-4 rounded-full font-medium flex items-center justify-center gap-2 text-base border border-white/20 hover:bg-white/5 transition-colors bg-white/5 backdrop-blur-sm">
+          </a>
+          <a href={STORE_LINKS.googlePlay} target="_blank" rel="noreferrer" className="px-8 py-4 rounded-full font-medium flex items-center justify-center gap-2 text-base border border-white/20 hover:bg-white/5 transition-colors bg-white/5 backdrop-blur-sm">
             <Play className="w-5 h-5" /> Get it on Google Play
-          </button>
+          </a>
         </motion.div>
 
-        <motion.p 
+        <motion.p
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
           className="text-sm text-white/40 font-medium"
         >
-          Join 10,000+ people already tracking
+          {APP_DATA.googlePlayDownloads} Downloads
         </motion.p>
       </div>
     </section>
@@ -614,19 +622,21 @@ const Footer = () => {
     <footer className="bg-[var(--dark-bg)] border-t border-[rgba(255,255,255,0.06)] py-12">
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-6">
         <div className="flex items-center gap-3">
-          <div className="w-6 h-6 rounded bg-[var(--primary)] flex items-center justify-center">
-            <CheckCircle2 className="w-3 h-3 text-white" />
-          </div>
-          <span className="font-display font-bold text-white">Protein Tracker Pro</span>
-        </div>
-        
-        <div className="text-sm text-[var(--text-secondary-dark)] text-center md:text-left">
-          © 2025 Protein Tracker Pro. All rights reserved.
+          <img src={APP_DATA.icon} alt={`${APP_DATA.name} icon`} className="w-6 h-6 rounded object-cover" />
+          <span className="font-display font-bold text-white">{APP_DATA.name}</span>
         </div>
 
-        <div className="flex gap-6 text-sm text-[var(--text-secondary-dark)]">
-          <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-          <a href="#" className="hover:text-white transition-colors">Terms of Use</a>
+        <div className="text-sm text-[var(--text-secondary-dark)] text-center md:text-left">
+          © 2026 {APP_DATA.name}. {APP_DATA.category}. {APP_DATA.developerDisplay}.
+        </div>
+
+        <div className="flex flex-wrap justify-center gap-6 text-sm text-[var(--text-secondary-dark)]">
+          {/* <a href={STORE_LINKS.website} target="_blank" rel="noreferrer" className="hover:text-white transition-colors flex items-center gap-2"><Globe className="w-4 h-4" /> Website</a> */}
+          <a href={STORE_LINKS.supportEmail} className="hover:text-white transition-colors flex items-center gap-2">
+            {/* <Mail className="w-4 h-4" />  */}
+            Support</a>
+          <a href={STORE_LINKS.privacyPolicy} target="_blank" rel="noreferrer" className="hover:text-white transition-colors">Privacy Policy</a>
+          <a href={STORE_LINKS.termsOfUse} target="_blank" rel="noreferrer" className="hover:text-white transition-colors">Terms of Use</a>
         </div>
       </div>
     </footer>
