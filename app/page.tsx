@@ -93,7 +93,7 @@ const Navbar = () => {
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center pt-24 pb-12 overflow-hidden mesh-bg">
+    <section id="hero" aria-label="Hero" className="relative min-h-screen flex items-center pt-24 pb-12 overflow-hidden mesh-bg">
       <div className="max-w-7xl mx-auto px-6 md:px-12 w-full grid lg:grid-cols-[60%_40%] gap-12 items-center relative z-10">
 
         <div className="flex flex-col items-start">
@@ -131,10 +131,10 @@ const Hero = () => {
             transition={{ duration: 0.7, ease: "easeOut", delay: 0.3 }}
             className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-6"
           >
-            <a href={STORE_LINKS.appStore} target="_blank" rel="noreferrer" className="btn-primary px-8 py-4 rounded-full font-medium flex items-center justify-center gap-2 text-base">
+            <a href={STORE_LINKS.appStore} target="_blank" rel="noreferrer" aria-label="Download Protein Tracker Pro on the App Store" className="btn-primary px-8 py-4 rounded-full font-medium flex items-center justify-center gap-2 text-base">
               <Apple className="w-5 h-5" /> Download on App Store
             </a>
-            <a href={STORE_LINKS.googlePlay} target="_blank" rel="noreferrer" className="px-8 py-4 rounded-full font-medium flex items-center justify-center gap-2 text-base border border-white/20 hover:bg-white/5 transition-colors">
+            <a href={STORE_LINKS.googlePlay} target="_blank" rel="noreferrer" aria-label="Get Protein Tracker Pro on Google Play" className="px-8 py-4 rounded-full font-medium flex items-center justify-center gap-2 text-base border border-white/20 hover:bg-white/5 transition-colors">
               <Play className="w-5 h-5" /> Get it on Google Play
             </a>
           </motion.div>
@@ -166,11 +166,14 @@ const Hero = () => {
           >
             <div className="iphone-notch"></div>
             <div className="iphone-screen">
-              <img
-                src={APP_DATA.screenshots[0]}
-                alt="Protein Tracker Pro screenshot"
-                className="h-full w-full object-contain object-center bg-[#111]"
-              />
+                <img
+                  src={APP_DATA.screenshots[0]}
+                  alt="Protein Tracker Pro home screen showing daily protein tracking dashboard"
+                  className="h-full w-full object-contain object-center bg-[#111]"
+                  width={390}
+                  height={844}
+                  loading="eager"
+                />
             </div>
           </motion.div>
         </motion.div>
@@ -208,7 +211,7 @@ const CountUp = ({ end, suffix = "", decimals = 0 }: { end: number, suffix?: str
 
 const SocialProof = () => {
   return (
-    <section className="bg-[var(--dark-surface)] border-y border-[var(--dark-border)] py-8 relative">
+    <section id="stats" aria-label="App statistics" className="bg-[var(--dark-surface)] border-y border-[var(--dark-border)] py-8 relative">
       <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[var(--primary)] to-transparent opacity-20"></div>
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-[var(--dark-border)] text-center">
@@ -248,7 +251,7 @@ const Features = () => {
   };
 
   return (
-    <section className="py-32 relative" ref={ref}>
+    <section id="features" aria-label="Features" className="py-32 relative" ref={ref}>
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="text-center mb-20">
           <motion.div
@@ -318,7 +321,7 @@ const Showcase = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-32 relative overflow-hidden bg-[#050709]" ref={ref}>
+    <section id="showcase" aria-label="App showcase" className="py-32 relative overflow-hidden bg-[#050709]" ref={ref}>
       {/* Background Orb */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[var(--primary)] rounded-full opacity-[0.03] blur-[120px] pointer-events-none"></div>
 
@@ -428,7 +431,7 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section className="py-32 bg-[var(--light-bg)] text-gray-900 overflow-hidden" ref={ref}>
+    <section id="how-it-works" aria-label="How it works" className="py-32 bg-[var(--light-bg)] text-gray-900 overflow-hidden" ref={ref}>
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="text-center mb-24">
           <motion.div
@@ -508,7 +511,7 @@ const Testimonials = () => {
   ];
 
   return (
-    <section className="py-32 bg-[var(--dark-bg)] relative" ref={ref}>
+    <section id="reviews" aria-label="User reviews" className="py-32 bg-[var(--dark-bg)] relative" ref={ref}>
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -554,7 +557,7 @@ const FinalCTA = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-32 relative overflow-hidden bg-[#050709] border-t border-[var(--dark-border)]" ref={ref}>
+    <section id="download" aria-label="Download call to action" className="py-32 relative overflow-hidden bg-[#050709] border-t border-[var(--dark-border)]" ref={ref}>
       {/* Animated Radial Pulse */}
       <motion.div
         animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
@@ -596,10 +599,10 @@ const FinalCTA = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="flex flex-col sm:flex-row justify-center gap-4 mb-8"
         >
-          <a href={STORE_LINKS.appStore} target="_blank" rel="noreferrer" className="btn-primary px-8 py-4 rounded-full font-medium flex items-center justify-center gap-2 text-base">
+          <a href={STORE_LINKS.appStore} target="_blank" rel="noreferrer" aria-label="Download Protein Tracker Pro on the App Store" className="btn-primary px-8 py-4 rounded-full font-medium flex items-center justify-center gap-2 text-base">
             <Apple className="w-5 h-5" /> Download on App Store
           </a>
-          <a href={STORE_LINKS.googlePlay} target="_blank" rel="noreferrer" className="px-8 py-4 rounded-full font-medium flex items-center justify-center gap-2 text-base border border-white/20 hover:bg-white/5 transition-colors bg-white/5 backdrop-blur-sm">
+          <a href={STORE_LINKS.googlePlay} target="_blank" rel="noreferrer" aria-label="Get Protein Tracker Pro on Google Play" className="px-8 py-4 rounded-full font-medium flex items-center justify-center gap-2 text-base border border-white/20 hover:bg-white/5 transition-colors bg-white/5 backdrop-blur-sm">
             <Play className="w-5 h-5" /> Get it on Google Play
           </a>
         </motion.div>
