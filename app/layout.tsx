@@ -18,6 +18,9 @@ export const metadata: Metadata = {
   icons: {
     icon: 'https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/f4/7e/46/f47e4665-92e6-7493-2f07-f1cc305133f0/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/512x512bb.jpg',
   },
+  verification: {
+    google: 'googlee9b84fa3f6b9c8da',
+  },
 };
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
