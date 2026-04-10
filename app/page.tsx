@@ -148,7 +148,7 @@ const Hero = () => {
             <div className="flex text-yellow-500">
               {[...Array(5)].map((_, i) => <Star key={i} className="w-3 h-3 fill-current" />)}
             </div>
-            <span>{APP_DATA.appStoreRating} App Store rating · {APP_DATA.googlePlayDownloads} Downloads · {APP_DATA.price} to download</span>
+            <span>{APP_DATA.appStoreRating} rating · {APP_DATA.googlePlayDownloads} users · free to download</span>
           </motion.div>
         </div>
 
@@ -610,7 +610,9 @@ const FinalCTA = () => {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="text-sm text-white/40 font-medium"
         >
-          {APP_DATA.googlePlayDownloads} Downloads
+          Join {APP_DATA.googlePlayDownloads} people already tracking
+
+
         </motion.p>
       </div>
     </section>
@@ -627,7 +629,7 @@ const Footer = () => {
         </div>
 
         <div className="text-sm text-[var(--text-secondary-dark)] text-center md:text-left">
-          © 2026 {APP_DATA.name}. {APP_DATA.category}. {APP_DATA.developerDisplay}.
+          © 2026 {APP_DATA.name}.  {APP_DATA.developerDisplay}. All rights reserved.
         </div>
 
         <div className="flex flex-wrap justify-center gap-6 text-sm text-[var(--text-secondary-dark)]">
